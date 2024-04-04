@@ -1,5 +1,7 @@
 import requests
 import pytest
+import os
+
 from endpoints.get_all_memes import GetAllMemes
 from endpoints.get_meme_by_id import GetMeme
 from endpoints.add_new_meme import AddNewMeme
@@ -12,6 +14,10 @@ url = "http://167.172.172.115:52355"
 
 @pytest.fixture(scope='session')
 def get_token():
+
+    if not os.path.exists("token.txt"):
+        with open("token.txt", 'w'): pass
+
     with open("token.txt", "r") as token_file:
         token = token_file.read()
 
